@@ -2,12 +2,12 @@
 using namespace std;
 
 
-class fenwick_tree2d{
+class FenwickTree2D{
     vector<vector<long long>> tree;
     int n, m;
 
 public:
-    fenwick_tree2d(vector<vector<long long>> &arr){
+    FenwickTree2D(vector<vector<long long>> &arr){
         n = arr.size();
         m = arr[0].size();
         tree = vector<vector<long long>>(n+1, vector<long long>(n+1, 0));
