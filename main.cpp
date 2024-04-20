@@ -1,10 +1,9 @@
 #include <bits/stdc++.h>
+using namespace std;
 
 #ifdef LOCAL
-#include "..\debugging.h"
+#include "C:\Users\Divyansh Goel\CLionProjects\debugging.h"
 #endif
-
-using namespace std;
 
 #define int long long
 using vi = vector<int>;
@@ -40,131 +39,7 @@ static vb DEFAULT_BOOL_VECTOR;
 static vi DEFAULT_INT_VECTOR;
 
 
-class fenwick_tree{
-    vector<int> tree;
 
-public:
-    fenwick_tree(vector<int> &arr){
-        int n = arr.size();
-        tree = vector<int>(n+1, 0);
-
-        for(int i=1; i<=n; ++i){
-            tree[i] = arr[i-1];
-
-            for(int temp = i-1; temp> i-(i&-i); temp -= temp&-temp)
-                tree[i] += tree[temp];
-        }
-    }
-
-
-    int query(int i){
-        int ans = 0;
-
-        while(i){
-            ans += tree[i];
-            i -= i&-i;
-        }
-
-        return ans;
-    }
-
-    int query(int l, int r){
-        return query(r) - query(l-1);
-    }
-
-    void update(int i, int x){
-        for(int k= i&-i; i < tree.size(); k<<=1){
-            tree[i] += x;
-            i += k;
-        }
-    }
-
-    void display(){
-        for(auto it: tree)
-            cout << it << " ";
-        cout << endl;
-    }
-
-};
-
-class fenwick_tree2d{
-    vector<vector<int>> tree;
-    int n, m;
-
-public:
-    fenwick_tree2d(vector<vector<int>> &arr){
-        n = arr.size();
-        m = arr[0].size();
-        tree = vector<vector<int>>(n+1, vector<int>(n+1, 0));
-
-        for(int i=1; i<=n; ++i){
-            for(int j=1; j<=m; ++j){
-                tree[i][j] = arr[i-1][j-1];
-                for(int temp = j-1; temp> j-(j&-j); temp -= temp&-temp)
-                    tree[i][j] += tree[i][temp];
-            }
-        }
-
-        for(int i=1; i<=n; ++i)
-            for(int j=1; j<= m; ++j)
-                for(int temp = i-1; temp>i-(i&-i); temp -= temp&-temp)
-                    tree[i][j] += tree[temp][j];
-
-    }
-
-    int rowquery(int i, int j){
-        int ans = 0;
-        while(j) {
-            ans += tree[i][j];
-            j -= j & -j;
-        }
-        return ans;
-    }
-
-    int query(int i, int j){
-        int ans=0;
-        int temp = i;
-        while(temp){
-            ans += rowquery(i=temp, j);
-            temp -= temp&-temp;
-        }
-
-        return ans;
-    }
-
-    int query(int i, int j, int x, int y){
-        int a, b, c, d;
-        a = query(x, y);
-        b = query(x, j-1);
-        c = query(i-1, y);
-        d = query(i-1, j-1);
-
-        return a -b -c +d;
-    }
-
-    void updaterow(int i, int j, int v){
-        while(j<=m){
-            tree[i][j] += v;
-            j += j&-j;
-        }
-    }
-
-    void update(int i, int j, int v){
-        while(i<=n){
-            updaterow(i, j, v);
-            i += i&-i;
-        }
-    }
-
-
-    void display(){
-        for(auto it: tree){
-            for(auto jt: it) cout << jt << "\t";
-            cout << endl;
-        }
-    }
-
-};
 
 
 int binary_exp(int n, int pow, int m=mod){
