@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class fenwick_tree{
+class FenwickTree{
     vector<long long> tree;
 
 public:
-    fenwick_tree(vector<long long> &arr){
+    FenwickTree(vector<long long> &arr){
         int n = arr.size();
         tree = vector<long long>(n+1, 0);
 
