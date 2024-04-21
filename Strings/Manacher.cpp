@@ -1,11 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
+// Returns a vector<int> of size 2n-1 with each index denoting how far the palindrome goes in 1 direction
 vector<int> manacher(const string& arg){
     string s;
-    for (auto c: arg) {
+    for (auto c: arg)
         s += string("#") + c;
-    }
+
     s = '$' + s + string("#^");
     int n = s.size();
 
@@ -23,3 +25,4 @@ vector<int> manacher(const string& arg){
     return {ans.begin()+2, ans.end()-2};
 
 }
+

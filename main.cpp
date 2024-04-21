@@ -42,41 +42,6 @@ static vi DEFAULT_INT_VECTOR;
 
 
 
-int binary_exp(int n, int pow, int m=mod){
-    int ans = 1;
-    while(pow>0) {
-        if (pow & 1)
-            ans = ans * n % m;
-        n = n * n % m;
-        pow >>= 1;
-    }
-    return ans;
-}
-
-vector<int> manacher(const string& arg){
-    string s;
-    for (auto c: arg) {
-        s += string("#") + c;
-    }
-    s = '$' + s + string("#^");
-    int n = s.size();
-
-    vector<int> ans(n);
-    int l=2, r=2;
-    for(int i=2; i<n-2; ++i){
-        int temp = min(r-i, ans[l+ (r-i)]);
-        ans[i] = max(0ll, temp);
-        while(s[i-ans[i]] == s[i+ans[i]]) ++ans[i];
-
-        if(i+ans[i] > r)
-            l = i - ans[i],  r = i + ans[i];
-    }
-
-    return {ans.begin()+2, ans.end()-2};
-
-}
-
-
 pi farthest(vvi &adj, int root, vector<bool> &visited ){
     pi ans = {root, 0};
     visited[root] = true;
