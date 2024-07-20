@@ -1,2 +1,2 @@
-# Competitive-Programming
+    # Competitive-Programming
 Code snippets for CP.

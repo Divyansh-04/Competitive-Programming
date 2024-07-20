@@ -29,7 +29,7 @@ public:
         return ans;
     }
 
-    // 1-indexed
+    // 1-indexed inclusive
     long long query(int l, int r){
         return query(r) - query(l-1);
     }
@@ -37,9 +37,9 @@ public:
 
     // 1-indexed
     void update(int i, long long delta){
-        for(int k= i&-i; i < tree.size(); k<<=1){
+        while(i < tree.size()) {
             tree[i] += delta;
-            i += k;
+            i += i & -i;
         }
     }
 

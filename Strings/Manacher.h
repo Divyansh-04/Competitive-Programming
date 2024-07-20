@@ -3,6 +3,7 @@ using namespace std;
 
 
 // Returns a vector<int> of size 2n-1 with each index denoting how far the palindrome goes in 1 direction
+// v[i] = sizeof(largest palindrome centered at i) -1
 vector<int> manacher(const string& arg){
     string s;
     for (auto c: arg)
@@ -25,4 +26,3 @@ vector<int> manacher(const string& arg){
     return {ans.begin()+2, ans.end()-2};
 
 }
-
