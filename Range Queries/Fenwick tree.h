@@ -11,9 +11,8 @@ public:
 
         for(int i=1; i<=n; ++i){
             tree[i] = arr[i-1];
-
-            for(int temp = i-1; temp > i-(i&-i); temp -= temp&-temp)
-                tree[i] += tree[temp];
+            for(int j = i-1; j > i-(i&-i); j -= j&-j)
+                tree[i] += tree[j];
         }
     }
 
