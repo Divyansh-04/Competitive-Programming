@@ -8,11 +8,11 @@ long long binaryExp(long long b, long long e, long long m=mod){
         if (e & 1)
             ans = ans * b % m;
         b = b * b % m;
-        b >>= 1;
+        e >>= 1;
     }
     return ans;
 }
 
-long long modInverse(long long n, long long m=mod){
+long long inv(long long n, long long m=mod){
     return binaryExp(n, m-2, m);
 }

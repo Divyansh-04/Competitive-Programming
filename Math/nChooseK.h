@@ -18,14 +18,16 @@ long long binaryExp(long long b, long long e, long long m=mod){
     return ans;
 }
 
-long long modInverse(long long n, long long m=mod){
+long long inv(long long n, long long m=mod){
     return binaryExp(n, m-2, m);
 }
 
 
-vector<int> fact(100001, 1);
+const int N = 1e5;
+int fact[N+1];
 void initiateFact(int m=mod){
-    for(int i=2; i<fact.size(); ++i){
+    fact[0] = fact[1] = 1;
+    for(int i=2; i<=N; ++i){
         fact[i] = fact[i-1]*i%m;
     }
 }
@@ -34,6 +36,6 @@ long long nChoosek(int n, int k){
     if(k<0 || k>n) return 0;
     if(k==0 || k==n) return 1;
     if(k==1 || k==n-1) return n;
-    return fact[n]* modInverse(fact[k]*fact[n-k]%mod2, mod2) %mod2;
+    return fact[n]* inv(fact[k]*fact[n-k]%mod2, mod2) %mod2;
 }
 

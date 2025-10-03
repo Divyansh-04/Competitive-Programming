@@ -14,10 +14,13 @@ class SegmentTree {
     int n;
 
 public:
-    explicit SegmentTree(vector<T> &arr, T _identity = INT_MAX, function<T(T, T)> _merge = [](T a, T b){return min(a, b);})
+    SegmentTree(int _n=0, T _identity = INT_MAX, function<T(const T&, const T&)> _merge = [](T a, T b){return min(a, b);}) :
+    SegmentTree(vector<T>(_n, _identity), _identity, move(_merge)){}
+
+    SegmentTree(const vector<T> &arr, T _identity = INT_MAX, function<T(const T&, const T&)> _merge = [](T a, T b){return min(a, b);})
     :identity(_identity),  merge(std::move(_merge)) {
         n = arr.size();
-        n = (n&-n)==n?n: 1<<__lg(n)+1;
+        n = (n&-n)==n?n: 1<<(__lg(n)+1);
 
         tree = vector<T>(2*n, identity);
         for(int i=0; i<arr.size(); ++i)
